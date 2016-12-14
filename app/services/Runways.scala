@@ -1,6 +1,8 @@
 package services
 
-import models.{Runway, Airport}
+import models.Runway
+
+import scala.util.Try
 
 
 class Runways extends DataService[Runway] {
@@ -10,7 +12,8 @@ class Runways extends DataService[Runway] {
       id = columns(0).toInt,
       airportRef = columns(1).toInt,
       airportIdent = columns(2),
-      leIdent = columns(8)
+      surface = columns(5),
+      leIdent = Try(columns(8)).getOrElse("")
     )
   }
 }

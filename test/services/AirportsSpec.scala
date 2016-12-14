@@ -8,7 +8,7 @@ class AirportsSpec extends Specification {
     "Populate Airport from columns" in {
       val service = new Airports
 
-      service.build(Seq("1", "one", "Heliport", "Heli port")) ==== Airport(1, "one", "Heliport", "Heli port")
+      service.build(Seq("1", "one", "Heliport", "Heli port", "1", "3", "a", "b", "DE")) ==== Airport(1, "one", "Heliport", "Heli port", "DE")
     }
   }
 }

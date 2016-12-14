@@ -10,7 +10,8 @@ class Airports extends DataService[Airport] {
       id = columns(0).toInt,
       ident = columns(1),
       kind = columns(2),
-      name = columns(3)
+      name = columns(3),
+      countryCode = columns(8)
     )
   }
 }

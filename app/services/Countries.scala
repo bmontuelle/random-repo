@@ -12,4 +12,6 @@ class Countries extends DataService[Country] {
       name = columns(2)
     )
   }
+
+  def fromCode(code: String): Option[Country] = data.find(_.code == code)
 }

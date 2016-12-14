@@ -24,4 +24,10 @@ class Reports @Inject()(airports: Airports, countries: Countries, runways: Runwa
       (countries.fromCode(cc).map(_.name).getOrElse(""), typeOfRunways)
     }
   }
+
+  lazy val top10RunwaysIdent: Vector[(String, Int)] = {
+    runways.data.groupBy(_.leIdent).toVector.sortBy(_._2.size).reverse.take(10).map {
+      case (rwIdent: String, runways: Seq[runways]) => (rwIdent, runways.size)
+    }
+  }
 }

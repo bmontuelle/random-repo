@@ -38,13 +38,31 @@ class ReportsSpec extends Specification {
     }
   }
 
-
   "Reports.typeOfRunways" should {
-    service.typeOfRunways.take(4) ==== Map(
-      "Gibraltar" -> Set("ASP"),
-      "Haiti" -> Set("ASP"),
-      "British Virgin Islands" -> Set("UNK", "ASP"),
-      "" -> Set("Gravel", "UNK", "Gravel/Grass", "ASP", "Grass")
-    )
+    "return type of runways grouped per countries" in {
+      service.typeOfRunways.take(4) ==== Map(
+        "Gibraltar" -> Set("ASP"),
+        "Haiti" -> Set("ASP"),
+        "British Virgin Islands" -> Set("UNK", "ASP"),
+        "" -> Set("Gravel", "UNK", "Gravel/Grass", "ASP", "Grass")
+      )
+    }
+  }
+
+  "Reports.top10RunwaysIdent" should {
+    "return most popular runway ident" in {
+      service.top10RunwaysIdent ==== Vector(
+        ("H1", 5560),
+        ("18", 3180),
+        ("09", 2580),
+        ("17", 2317),
+        ("16", 1559),
+        ("12", 1506),
+        ("14", 1469),
+        ("08", 1459),
+        ("13", 1447),
+        ("15", 1398)
+      )
+    }
   }
 }

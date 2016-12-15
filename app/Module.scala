@@ -1,4 +1,5 @@
 import com.google.inject.AbstractModule
+import services.{Reports, Countries, Runways, Airports}
 
 /**
  * This class is a Guice module that tells Guice how to bind several

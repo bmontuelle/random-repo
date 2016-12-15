@@ -1,0 +1,90 @@
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+@(
+        top10Countries: Vector[(String, Int)],
+        bottom10Countries: Vector[(String, Int)],
+        typeOfRunways: Vector[(String, Set[String])],
+        top10RunwaysIdent: Vector[(String, Int)]
+)
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("Reports - Welcome to Lunatech code assesment") {
+
+    <h2>Reports</h2>
+    <h3>10 countries with highest number of airports</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Country</td>
+                <td>Airports count</td>
+            </tr>
+        </thead>
+        <tbody>
+            @top10Countries.map { l =>
+                <tr>
+                    <td>@l._1</td>
+                    <td>@l._2</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>10 countries with lowest number of airports</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Country</td>
+                <td>Airports count</td>
+            </tr>
+        </thead>
+        <tbody>
+        @bottom10Countries.map { l =>
+            <tr>
+                <td>@l._1</td>
+                <td>@l._2</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <h3>Type of runways per country</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Country</td>
+                <td>Runway type</td>
+            </tr>
+        </thead>
+        <tr>
+        @typeOfRunways.map { l =>
+            <td>@l._1</td>
+            <td>@l._2.mkString(", ")</td>
+        }
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <h3>top 10 most common runway identifications</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Runway ident.</td>
+                <td>Count</td>
+            </tr>
+        </thead>
+        <tbody>
+        @top10RunwaysIdent.map { l =>
+            <tr>
+                <td>@l._1</td>
+                <td>@l._2</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,12 +1,14 @@
 package services
 
+import org.specs2.concurrent.ExecutionEnv
 import org.specs2.mutable.Specification
+import scala.concurrent.duration._
 
 class ReportsSpec extends Specification {
   val service = new Reports(new Airports, new Countries, new Runways)
   "Reports.top10Countries" should {
-    "sort 10 countries with the most airport count" in {
-      service.top10Countries ==== Vector(
+    "sort 10 countries with the most airport count" in { implicit ee: ExecutionEnv =>
+      service.top10Countries must be_==(Vector(
         ("United States", 21476),
         ("Brazil", 3839),
         ("Canada", 2453),
@@ -17,13 +19,13 @@ class ReportsSpec extends Specification {
         ("Germany", 703),
         ("Colombia", 699),
         ("Venezuela", 592)
-      )
+      )).awaitFor(180 seconds)
     }
   }
 
   "Reports.bottom10Countries" should {
-    "sort 10 countries with the least airport count" in {
-      service.bottom10Countries ==== Vector(
+    "sort 10 countries with the least airport count" in { implicit ee: ExecutionEnv =>
+      service.bottom10Countries must be_==(Vector(
         ("Jersey", 1),
         ("Gibraltar", 1),
         ("Norfolk Island", 1),
@@ -34,24 +36,24 @@ class ReportsSpec extends Specification {
         ("Andorra", 1),
         ("Saint Helena", 1),
         ("Cocos (Keeling) Islands", 1)
-      )
+      )).awaitFor(180 seconds)
     }
   }
 
   "Reports.typeOfRunways" should {
-    "return type of runways grouped per countries" in {
-      service.typeOfRunways.take(4) ==== Map(
-        "Gibraltar" -> Set("ASP"),
-        "Haiti" -> Set("ASP"),
-        "British Virgin Islands" -> Set("UNK", "ASP"),
-        "" -> Set("Gravel", "UNK", "Gravel/Grass", "ASP", "Grass")
-      )
+    "return type of runways grouped per countries" in { implicit ee: ExecutionEnv =>
+      service.typeOfRunways.map(_.take(4)) must be_==(Vector(
+        ("Cape Verde", Set("ASP", "UNK")),
+        ("Morocco", Set("ASP", "BIT", "UNK", "CON")),
+        ("Angola", Set("ASP", "", "UNK")),
+        ("Vietnam",Set("", "ASP", "CON", "UNK"))
+      )).awaitFor(180 seconds)
     }
   }
 
   "Reports.top10RunwaysIdent" should {
-    "return most popular runway ident" in {
-      service.top10RunwaysIdent ==== Vector(
+    "return most popular runway ident" in { implicit ee: ExecutionEnv =>
+      service.top10RunwaysIdent must be_==(Vector(
         ("H1", 5560),
         ("18", 3180),
         ("09", 2580),
@@ -62,7 +64,7 @@ class ReportsSpec extends Specification {
         ("08", 1459),
         ("13", 1447),
         ("15", 1398)
-      )
+      )).awaitFor(180 seconds)
     }
   }
 }

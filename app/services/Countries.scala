@@ -14,4 +14,9 @@ class Countries extends DataService[Country] {
   }
 
   def fromCode(code: String): Option[Country] = data.find(_.code == code)
+
+  def search(q: String): Option[Country] = data.find(_.code.equalsIgnoreCase(q))
+    .orElse(data.find( _.name.equalsIgnoreCase(q)))
+    .orElse(data.find(c => q.length > 3 && c.name.toLowerCase.startsWith(q.toLowerCase)))
+
 }

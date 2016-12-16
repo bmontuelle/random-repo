@@ -1,0 +1,20 @@
+body {
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    color: #131313;
+}
+
+td {
+    text-align: left;
+}
+thead tr {
+    background-color: lightskyblue;
+}
+
+thead td {
+    font-weight: bold;
+    height: 1.5em;
+}
+
+tbody tr:nth-child(even) {
+    background-color: lightblue;
+}

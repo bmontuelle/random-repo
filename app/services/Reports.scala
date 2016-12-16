@@ -31,7 +31,7 @@ class Reports @Inject()(airports: Airports, countries: Countries, runways: Runwa
       Future.sequence(d.groupBy(_.countryCode).map({
         case (cc: String, airports: Seq[Airport]) => {
           for {
-            typeOfRunways <- runways.data.map(_.filter(r => airports.map(_.id).contains(r.airportRef)).map(_.surface).toSet)
+            typeOfRunways <- runways.data.map(_.filter(r => r.surface.nonEmpty && airports.map(_.id).contains(r.airportRef)).map(_.surface).toSet)
             countryName <- countries.fromCode(cc).map(_.map(_.name).getOrElse(""))
           } yield {
             (countryName, typeOfRunways)

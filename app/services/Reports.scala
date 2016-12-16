@@ -2,7 +2,7 @@ package services
 
 
 import javax.inject._
-import models.Airport
+import models.{Runway, Airport}
 
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
@@ -43,7 +43,7 @@ class Reports @Inject()(airports: Airports, countries: Countries, runways: Runwa
 
   val top10RunwaysIdent: Future[Vector[(String, Int)]] = {
     runways.data.map(_.groupBy(_.leIdent).toVector.sortBy(_._2.size).reverse.take(10).map {
-      case (rwIdent: String, runways: Seq[runways]) => (rwIdent, runways.size)
+      case (rwIdent: String, runways: Vector[Runway]) => (rwIdent, runways.size)
     })
   }
 }

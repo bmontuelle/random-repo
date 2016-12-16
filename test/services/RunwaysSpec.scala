@@ -8,7 +8,7 @@ class RunwaysSpec extends Specification {
     "Populate Runway from columns" in {
       val service = new Runways
 
-      service.build(Seq("1", "701", "Airport_1", "z", "y", "ASPH", "w", "v", "RW1")) ==== Runway(1, 701, "Airport_1", "ASPH", "RW1")
+      service.build(Vector("1", "701", "Airport_1", "z", "y", "ASPH", "w", "v", "RW1")) ==== Runway(1, 701, "Airport_1", "ASPH", "RW1")
     }
   }
 }

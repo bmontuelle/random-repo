@@ -1,16 +1,16 @@
 package services
 
 import javax.inject._
+
 import models.Country
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 import scala.concurrent.Future
-
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 @Singleton
 class Countries extends DataService[Country] {
   override val sourceFile = "countries.csv"
-  override def build(columns: Seq[String]) = {
+  override def build(columns: Vector[String]) = {
     Country(
       id = columns(0).toInt,
       code = cleanCSVString(columns(1)),

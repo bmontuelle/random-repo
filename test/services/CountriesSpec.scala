@@ -10,7 +10,7 @@ class CountriesSpec extends Specification {
 
   "Countries.build" should {
     "Populate Country from columns" in {
-      service.build(Seq("876", "FR", "France")) must be_==(Country(876, "FR", "France"))
+      service.build(Vector("876", "FR", "France")) must be_==(Country(876, "FR", "France"))
     }
   }
 

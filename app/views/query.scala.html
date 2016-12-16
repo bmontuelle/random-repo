@@ -1,4 +1,32 @@
-@()
+@(
+        q: Option[String],
+        airports: Vector[(Airport, Vector[Runway])]
+)
 
-<h2>Query</h2>
-<h3>10 countries with highest number of airports</h3>
+@main("Reports - Welcome to Lunatech code assesment") {
+    <h2>Query</h2>
+    <h3>Print country airports and runways</h3>
+
+    <form action="" method="get">
+        <input type="text" name="q" placeholder="Country name or code" value="@q" />
+        <input type="submit">
+    </form>
+
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <td>Airport</td>
+                <td>Runway(s)</td>
+            </tr>
+        </thead>
+        <tbody>
+    @airports.map { t =>
+        <tr>
+            <td>@t._1.name</td>
+            <td>@t._2.map(_.leIdent).mkString(", ")</td>
+        </tr>
+    }
+        </tbody>
+    </table>
+}

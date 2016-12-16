@@ -9,7 +9,7 @@ class DataServiceSpec extends Specification {
     "read a csv file lines" in { implicit ee: ExecutionEnv =>
       object dataServiceTest extends DataService[Map[String, Any]] {
         override def sourceFile = "test-data.csv"
-        override def build(columns: Seq[String]) = {
+        override def build(columns: Vector[String]) = {
            Map(
              "id" -> columns(0).toInt,
              "name" -> cleanCSVString(columns(1)),
@@ -18,7 +18,7 @@ class DataServiceSpec extends Specification {
         }
       }
 
-      dataServiceTest.data must be_==(Seq(
+      dataServiceTest.data must be_==(Vector(
         Map(
           "id" -> 987,
           "name" -> "John",

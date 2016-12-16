@@ -8,7 +8,7 @@ import scala.util.Try
 @Singleton
 class Runways extends DataService[Runway] {
   override val sourceFile = "runways.csv"
-  override def build(columns: Seq[String]) = {
+  override def build(columns: Vector[String]) = {
     Runway(
       id = columns(0).toInt,
       airportRef = columns(1).toInt,

@@ -5,7 +5,8 @@ import org.specs2.mutable.Specification
 import scala.concurrent.duration._
 
 class ReportsSpec extends Specification {
-  val service = new Reports(new Airports, new Countries, new Runways)
+  val runways = new Runways
+  val service = new Reports(new Airports(runways), new Countries, new Runways)
   "Reports.top10Countries" should {
     "sort 10 countries with the most airport count" in { implicit ee: ExecutionEnv =>
       service.top10Countries must be_==(Vector(

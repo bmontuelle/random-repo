@@ -60,10 +60,11 @@
                 <td>Runway type</td>
             </tr>
         </thead>
-        <tr>
         @typeOfRunways.map { l =>
-            <td>@l._1</td>
-            <td>@l._2.mkString(", ")</td>
+            <tr>
+                <td>@l._1</td>
+                <td>@l._2.mkString(", ")</td>
+            </tr>
         }
         <tbody>
 
